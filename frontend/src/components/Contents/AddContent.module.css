@@ -1,0 +1,70 @@
+.input {
+  margin: 2rem 0;
+  float: left;
+  padding: 1.5rem 3rem;
+  width: 90%;
+  max-width: 40rem;
+}
+
+.input label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font: inherit;
+  border: 1px solid #00285f;
+  background: #00285f;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+  float: left;
+}
+
+.input label:hover,
+.input label:active {
+  background: #264f89;
+  border-color: #264f89;
+}
+
+.input label:focus {
+  outline: none;
+}
+
+.input input {
+  font: inherit;
+  display: block;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 10px;
+}
+
+.input input[id="title"] {
+  float: left;
+  width: 60%;
+}
+.input input[id="password"] {
+  float: right;
+  width: 38%;
+}
+
+.input input:focus {
+  outline: none;
+  border-color: #4f005f;
+}
+
+.input input[type="file"] {
+  display: none;
+}
+
+.input div[class="preview"] {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input div[class="preview"] img {
+  width: 100%;
+}
+
