@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import AddContent from "./components/Contents/AddContent";
 import ContentsList from "./components/Contents/ContentsList";
@@ -8,19 +9,35 @@ import "./App.css";
 function App() {
   const [contentsList, setContentsList] = useState([]);
 
+  useEffect(() => {
+    axios.get("/content/").then((response) => {
+      setContentsList(response.data);
+    })
+  }, []);
+
+  // const addContentHandler = (title, image, password) => {
+  //   setContentsList((prevContentsList) => {
+  //     return [
+  //       ...prevContentsList,
+  //       {
+  //         title: title,
+  //         image: image,
+  //         password: password,
+  //         id: Math.random().toString(),
+  //       },
+  //     ];
+  //   });
+  // };
+
   const addContentHandler = (title, image, password) => {
-    setContentsList((prevContentsList) => {
-      return [
-        ...prevContentsList,
-        {
-          title: title,
-          image: image,
-          password: password,
-          id: Math.random().toString(),
-        },
-      ];
-    });
-  };
+    axios.post("/content/", {
+      pic: image,
+      title: title,
+      password: password
+    }).then((response) => {
+      console.log(response);
+    })
+  }
 
   const updateContentHandler = (title, image, password, id) => {
     setContentsList((prevContentsList) => {
@@ -41,10 +58,23 @@ function App() {
     });
   };
 
+  const deleteContentHandler = (id) => {
+    setContentsList((prevContentsList) => {
+      const updatedContent = prevContentsList.filter(
+        (content) => content.id !== id
+      );
+      return updatedContent;
+    });
+  };
+
   return (
     <div className="root">
       <AddContent onAddContent={addContentHandler} />
-      <ContentsList contents={contentsList} onUpdateContent={updateContentHandler} />
+      <ContentsList
+        contents={contentsList}
+        onUpdateContent={updateContentHandler}
+        onDeleteContent={deleteContentHandler}
+      />
     </div>
   );
 }

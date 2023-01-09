@@ -9,6 +9,7 @@ import classes from "./ContentsList.module.css";
 const ContentsList = (props) => {
   const [control, setControl] = useState();
 
+  console.log(props);
   const updateHandler = (data, event) => {
     setControl({
       id: data.id,
@@ -37,6 +38,10 @@ const ContentsList = (props) => {
     props.onUpdateContent(title, image, password, id);
   }
 
+  const onDelete = (id) => {
+    props.onDeleteContent(id);
+  }
+
   return (
     <Wrapper>
       {control && (
@@ -48,14 +53,15 @@ const ContentsList = (props) => {
           type={control.type}
           onConfirm={controlHandler}
           onUpdate={onUpdate}
+          onDelete={onDelete}
         />
       )}
       <Card className={classes.contents}>
         <ul>
           {props.contents.map((content) => (
-            <li key={content.id}>
+            <li key={content.uid}>
               <b>{content.title}</b>
-              <img alt="sample" src={content.image} />
+              <img alt="sample" src={content.path} />
               <Button
                 className={"update"}
                 onClick={(event) => {

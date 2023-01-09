@@ -38,11 +38,27 @@ const ModalOverlay = (props) => {
     setMode("SUCCESS");
   }
 
+  const deleteContentHandler = (event) => {
+    event.preventDefault();
+    props.onDelete(props.id);
+    setMode("SUCCESS");
+  }
+
   const updateConfirm = (event) => {
     event.preventDefault();
     const enteredPassword = passwordRef.current.value;
     if (enteredPassword === password) {
       setMode("DO_UPDATE");
+    } else {
+      setMode("FAIL");
+    }
+  };
+
+  const deleteConfirm = (event) => {
+    event.preventDefault();
+    const enteredPassword = passwordRef.current.value;
+    if (enteredPassword === password) {
+      setMode("DO_DELETE");
     } else {
       setMode("FAIL");
     }
@@ -62,6 +78,21 @@ const ModalOverlay = (props) => {
       <div>
         <h2>UPDATE</h2>
         <form onSubmit={updateConfirm}>
+          <input
+            className={classes.input} 
+            type="password"
+            placeholder="confirm password"
+            ref={passwordRef}
+          />
+          <Button type="submit">Confirm</Button>
+        </form>
+      </div>
+    );
+  } else if(mode === "DELETE") {
+    content = (
+      <div>
+        <h2>DELETE</h2>
+        <form onSubmit={deleteConfirm}>
           <input
             className={classes.input} 
             type="password"
@@ -104,7 +135,15 @@ const ModalOverlay = (props) => {
           <Button type="submit">Update</Button>
       </form>
     );
-  }else if(mode === 'SUCCESS') {
+  }else if(mode === 'DO_DELETE') {
+    content = (
+      <div>
+        <b>Confirm if you want to delete content.</b>
+        <Button onClick={deleteContentHandler}>Delete</Button>
+      </div>
+    );
+  }
+  else if(mode === 'SUCCESS') {
     content = <b>Succeded to "UPDATE" or "DELETE".</b>;
   } 
 
@@ -137,6 +176,7 @@ const ControlModal = (props) => {
           password={props.password}
           image={props.image}
           onUpdate={props.onUpdate}
+          onDelete={props.onDelete}
         />,
         document.getElementById("overlay-root")
       )}
