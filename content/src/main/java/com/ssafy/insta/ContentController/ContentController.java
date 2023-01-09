@@ -34,7 +34,7 @@ public class ContentController {
     //사진 등록
     @ResponseBody
     @PostMapping("/")
-    public ResponseEntity postContent(@RequestPart MultipartFile pic, String title, String password) throws IOException {
+    public ResponseEntity postContent(@RequestPart MultipartFile pic,  String title, String password) throws IOException {
         //dto에 담기
         ContentDto dto= ContentDto.builder()
                 .pic(pic)
@@ -48,7 +48,7 @@ public class ContentController {
     }
 
     //전체 이미지 조회
-    @ResponseBody
+//    @ResponseBody
     @GetMapping("/")
     public ResponseEntity getAllContents(){
         Iterable<ContentEntity> contentlist = contentService.getContentAll();
@@ -58,7 +58,7 @@ public class ContentController {
     }
 
     //사진 수정
-    @ResponseBody
+//    @ResponseBody
     @PutMapping("/{uid}")
     public ResponseEntity updateContent(@PathVariable long uid, @RequestPart MultipartFile pic, String title, String password ){
         ContentDto dto= ContentDto.builder()
@@ -72,7 +72,7 @@ public class ContentController {
     }
 
     //사진 삭제
-    @ResponseBody
+//    @ResponseBody
     @DeleteMapping("/{uid}")
     public ResponseEntity deleteContent(@PathVariable long uid, String pwd){
         contentService.delete(uid, pwd);

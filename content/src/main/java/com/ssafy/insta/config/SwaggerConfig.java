@@ -19,8 +19,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Bstagram API")
-                        .description("BMW 프로젝트 API 명세서입니다.")
+                .info(new Info().title("INSTA API")
+                        .description("insta CURD")
                         .version("v0.0.1"));
     }
 }
