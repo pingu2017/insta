@@ -16,7 +16,7 @@ public class ContentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //기본 키 생성을 DB에 위임하는 전략
     private long uid;
     private String path;
-    @Column(nullable = false, length =50)
+    @Column(nullable = false, length =200)
     private String title;
     private String save_title;
     @Column(nullable = false, length = 50)

@@ -17,7 +17,7 @@ import java.util.UUID;
 @Service
 public class ContentServicelmpl implements ContentService {
 
-//    @Value("${file.dir}")
+    @Value("${file.dir}")
     private String fileDir;
     private ContentRepository contentRepository;
     private CustomRepository customRepository;

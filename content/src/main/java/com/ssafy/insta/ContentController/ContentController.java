@@ -9,6 +9,7 @@ import com.ssafy.insta.service.ContentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,7 +34,7 @@ public class ContentController {
 
     //사진 등록
     @ResponseBody
-    @PostMapping("/")
+    @PostMapping(value = "/" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity postContent(@RequestPart MultipartFile pic,  String title, String password) throws IOException {
         //dto에 담기
         ContentDto dto= ContentDto.builder()
@@ -59,7 +60,7 @@ public class ContentController {
 
     //사진 수정
 //    @ResponseBody
-    @PutMapping("/{uid}")
+    @PutMapping(value = "/{uid}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity updateContent(@PathVariable long uid, @RequestPart MultipartFile pic, String title, String password ){
         ContentDto dto= ContentDto.builder()
                 .pic(pic)
